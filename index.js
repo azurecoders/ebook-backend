@@ -6,6 +6,7 @@ import userRouter from "./routes/user.route.js";
 import bookRouter from "./routes/book.route.js";
 import categoryRouter from "./routes/categories.route.js";
 import cookieParser from "cookie-parser";
+import corsMiddleware from "./corsMiddleware.js";
 
 dotenv.config();
 
@@ -13,12 +14,7 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB Connected"));
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:5173",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-
-app.use(cors(corsOptions));
+app.use(corsMiddleware);
 
 app.use(cookieParser());
 app.use(express.json());

@@ -13,6 +13,13 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB Connected"));
 
 const app = express();
 
+var corsOptions = {
+  origin: "http://localhost:5173",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
